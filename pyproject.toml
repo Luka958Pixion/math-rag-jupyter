@@ -9,6 +9,8 @@ readme = "README.md"
 python = ">=3.12"
 jupyter = "^1.1.1"
 ipykernel = "^6.29.5"
+fastapi = "^0.115.8"
+uvicorn = "^0.34.0"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.9.7"
