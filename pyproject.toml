@@ -7,7 +7,32 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.12"
+jupyter = "^1.1.1"
+ipykernel = "^6.29.5"
 
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.9.7"
+pre-commit = "^4.1.0"
+
+[tool.ruff]
+line-length = 88
+include = ["**/pyproject.toml", "**.py"]
+exclude = [".git", ".vscode", ".idea", "build", "dist"]
+
+[tool.ruff.lint]
+fixable = ["ALL"]
+unfixable = []
+select = ["I"]
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
+lines-between-types = 1
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
