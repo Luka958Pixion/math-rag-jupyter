@@ -29,15 +29,15 @@ SESSIONS_FOLDER = '/mnt/jupyter_sessions'
 
 @app.post('/start_session')
 async def start_session(user_id: str = Form(...)):
-    if user_id in session_manager.sessions:
-        session_manager.sessions[user_id].controller.cleanup()
+    if user_id in session_manager._sessions:
+        session_manager._sessions[user_id].controller.cleanup()
 
     session_folder = os.path.join(SESSIONS_FOLDER, user_id)
     controller = JupyterController(session_folder)
 
     try:
         notebook_path = await controller.create_notebook(f'notebook_{user_id}')
-        session_manager.sessions[user_id] = SessionInfo(controller, time.time())
+        session_manager._sessions[user_id] = SessionInfo(controller, time.time())
         setup_code = """
         import pandas as pd
         import numpy as np
@@ -92,10 +92,10 @@ async def reset_session(user_id: str = Form(...)):
 
 @app.post('/end_session')
 async def end_session(user_id: str = Form(...)):
-    if user_id not in session_manager.sessions:
+    if user_id not in session_manager._sessions:
         raise HTTPException(status_code=404, detail='Session not found')
 
-    session_info = session_manager.sessions.pop(user_id)
+    session_info = session_manager._sessions.pop(user_id)
     session_info.controller.cleanup()
 
     return {'message': 'Session ended successfully'}
