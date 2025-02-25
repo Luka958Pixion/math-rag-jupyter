@@ -4,6 +4,7 @@ import time
 
 from contextlib import asynccontextmanager
 
+from decouple import config
 from fastapi import FastAPI, Form, HTTPException
 
 from isolated_jupyter_kernel.controllers import JupyterController
@@ -23,8 +24,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-BASE_FOLDER = '/mnt/data'
-SESSIONS_DIR = '/mnt/jupyter_sessions'
+JUPYTER_SESSIONS_DIR = config('JUPYTER_SESSIONS_DIR', default='/mnt/jupyter_sessions')
 
 
 @app.post('/start_session')
@@ -32,7 +32,7 @@ async def start_session(user_id: str = Form(...)):
     if user_id in session_manager._sessions:
         session_manager._sessions[user_id].controller.cleanup()
 
-    session_dir = os.path.join(SESSIONS_DIR, user_id)
+    session_dir = os.path.join(JUPYTER_SESSIONS_DIR, user_id)
     controller = JupyterController(session_dir)
 
     try:
