@@ -12,8 +12,8 @@ from nbformat.v4 import new_notebook
 
 
 class JupyterController:
-    def __init__(self, folder_path):
-        self.folder_path = folder_path
+    def __init__(self, dir):
+        self.dir = dir
         self.notebook_path = None
         self.kernel_manager = None
         self.kernel_client = None
@@ -51,8 +51,8 @@ class JupyterController:
             await asyncio.sleep(0.1)
 
     async def create_notebook(self, notebook_name):
-        os.makedirs(self.folder_path, exist_ok=True)
-        self.notebook_path = os.path.join(self.folder_path, f'{notebook_name}.ipynb')
+        os.makedirs(self.dir, exist_ok=True)
+        self.notebook_path = os.path.join(self.dir, f'{notebook_name}.ipynb')
         nb = new_notebook()
 
         with open(self.notebook_path, 'w') as f:

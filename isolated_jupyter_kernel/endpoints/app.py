@@ -24,7 +24,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 BASE_FOLDER = '/mnt/data'
-SESSIONS_FOLDER = '/mnt/jupyter_sessions'
+SESSIONS_DIR = '/mnt/jupyter_sessions'
 
 
 @app.post('/start_session')
@@ -32,8 +32,8 @@ async def start_session(user_id: str = Form(...)):
     if user_id in session_manager._sessions:
         session_manager._sessions[user_id].controller.cleanup()
 
-    session_folder = os.path.join(SESSIONS_FOLDER, user_id)
-    controller = JupyterController(session_folder)
+    session_dir = os.path.join(SESSIONS_DIR, user_id)
+    controller = JupyterController(session_dir)
 
     try:
         notebook_path = await controller.create_notebook(f'notebook_{user_id}')
