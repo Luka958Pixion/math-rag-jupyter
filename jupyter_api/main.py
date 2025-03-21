@@ -1,6 +1,6 @@
 import uvicorn
 
-from jupyter.endpoints import app
+from jupyter_api.endpoints import app
 
 
 if __name__ == '__main__':
