@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "isolated-jupyter-kernel"
+name = "jupyter-api"
 version = "0.1.0"
 description = ""
 authors = ["Luka958Pixion <luka.panic@pixion.co>"]
