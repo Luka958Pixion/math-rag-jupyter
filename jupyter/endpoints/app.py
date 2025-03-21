@@ -7,9 +7,9 @@ from contextlib import asynccontextmanager
 from decouple import config
 from fastapi import FastAPI, Form, HTTPException
 
-from isolated_jupyter_kernel.controllers import JupyterController
-from isolated_jupyter_kernel.requests import ExecuteRequest
-from isolated_jupyter_kernel.sessions import SessionInfo, SessionManager
+from jupyter.controllers import JupyterController
+from jupyter.requests import ExecuteRequest
+from jupyter.sessions import SessionInfo, SessionManager
 
 
 session_manager = SessionManager()

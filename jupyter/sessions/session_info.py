@@ -1,4 +1,4 @@
-from isolated_jupyter_kernel.controllers import JupyterController
+from jupyter.controllers import JupyterController
 
 
 class SessionInfo:
