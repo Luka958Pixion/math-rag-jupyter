@@ -1,4 +1,4 @@
-from jupyter_api.controllers import JupyterController
+from math_rag_jupyter.controllers import JupyterController
 
 
 class SessionInfo:

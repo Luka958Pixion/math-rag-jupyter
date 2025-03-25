@@ -7,9 +7,9 @@ from contextlib import asynccontextmanager
 from decouple import config
 from fastapi import FastAPI, Form, HTTPException
 
-from jupyter_api.controllers import JupyterController
-from jupyter_api.requests import ExecuteRequest
-from jupyter_api.sessions import SessionInfo, SessionManager
+from math_rag_jupyter.controllers import JupyterController
+from math_rag_jupyter.requests import ExecuteRequest
+from math_rag_jupyter.sessions import SessionInfo, SessionManager
 
 
 session_manager = SessionManager()
