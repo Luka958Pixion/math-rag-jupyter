@@ -1,0 +1,18 @@
+services:
+  math-rag-jupyter-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    container_name: math_rag_jupyter_dev_container
+    volumes:
+      - ./:/workspaces:cached
+      - venv_volume:/workspaces/.venv
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./.env:/workspaces/.env:ro
+    ports:
+      - ${PORT}:${PORT}
+    command: sleep infinity
+
+volumes:
+  venv_volume:

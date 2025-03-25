@@ -1,0 +1,23 @@
+{
+    "name": "math-rag-jupyter-dev-container",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "math-rag-jupyter-service",
+    "workspaceFolder": "/workspaces",
+    "customizations": {
+      "vscode": {
+        "settings": {
+          "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
+        },
+        "extensions": [
+          "ms-python.python",
+          "ms-azuretools.vscode-docker",
+          "tamasfe.even-better-toml",
+          "uctakeoff.vscode-counter"
+        ]
+      }
+    },
+    "postCreateCommand": "poetry install --no-root --with dev && poetry run pre-commit install",
+    "remoteUser": "root",
+    "forwardPorts": ["${localEnv:PORT}"]
+  }
+  

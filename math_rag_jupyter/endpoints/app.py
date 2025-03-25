@@ -6,6 +6,7 @@ from contextlib import asynccontextmanager
 
 from decouple import config
 from fastapi import FastAPI, Form, HTTPException
+from scalar_fastapi import get_scalar_api_reference
 
 from math_rag_jupyter.controllers import JupyterController
 from math_rag_jupyter.requests import ExecuteRequest
@@ -100,6 +101,15 @@ async def end_session(user_id: str = Form(...)):
 
     return {'message': 'Session ended successfully'}
 
+
 @app.get('/health')
 async def health_check():
     return {'status': 'ok'}
+
+
+@app.get('/scalar', include_in_schema=False)
+async def scalar_html():
+    return get_scalar_api_reference(
+        openapi_url=app.openapi_url,
+        title=app.title,
+    )

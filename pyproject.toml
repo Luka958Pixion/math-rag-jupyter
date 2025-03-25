@@ -16,6 +16,7 @@ python-multipart = "^0.0.20"
 numpy = "^2.2.3"
 matplotlib = "^3.10.0"
 pandas = "^2.2.3"
+scalar-fastapi = "^1.0.3"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.9.7"
