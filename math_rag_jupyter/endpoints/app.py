@@ -99,3 +99,7 @@ async def end_session(user_id: str = Form(...)):
     session_info.controller.cleanup()
 
     return {'message': 'Session ended successfully'}
+
+@app.get('/health')
+async def health_check():
+    return {'status': 'ok'}
