@@ -41,7 +41,7 @@ RUN poetry install --no-root --only main
 COPY . .
 
 # Set production startup command
-CMD ["poetry", "run", "python", "-m" "math_rag_jupyter.main"]
+CMD ["poetry", "run", "python", "-m", "math_rag_jupyter.main"]
 
 # ---------- Development Stage ----------
 FROM base AS dev
