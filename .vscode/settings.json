@@ -4,6 +4,14 @@
       "${workspaceFolder}",
       "${workspaceFolder}/.venv/lib/python3.12/site-packages"
     ],
-    "python.languageServer": "Pylance"
+    "python.languageServer": "Pylance",
+    "files.exclude": {
+      "**/.venv": true,
+      "**/.ruff_cache": true
+    },
+    "search.exclude": {
+      "**/.venv": true,
+      "**/.ruff_cache": true
+    }
   }
   
