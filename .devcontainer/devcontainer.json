@@ -16,7 +16,7 @@
       ]
     }
   },
-  "postCreateCommand": "poetry install --no-root --with dev && poetry run pre-commit install",
+  "postCreateCommand": "sh ./.devcontainer/post-create.sh",
   "remoteUser": "root",
   "forwardPorts": ["${localEnv:PORT}"]
 }

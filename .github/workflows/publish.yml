@@ -43,5 +43,6 @@ jobs:
           context: .
           platforms: linux/amd64
           push: true
+          target: prod
           tags: ghcr.io/${{ steps.lowercase.outputs.owner_lc }}/math_rag_jupyter:latest
 
