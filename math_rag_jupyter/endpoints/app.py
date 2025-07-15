@@ -9,7 +9,6 @@ from fastapi import FastAPI, Form, HTTPException
 from scalar_fastapi import get_scalar_api_reference
 
 from math_rag_jupyter.controllers import JupyterController
-from math_rag_jupyter.requests import ExecuteRequest
 from math_rag_jupyter.sessions import SessionInfo, SessionManager
 
 
@@ -28,7 +27,7 @@ app = FastAPI(lifespan=lifespan)
 JUPYTER_SESSIONS_DIR = config('JUPYTER_SESSIONS_DIR', default='/mnt/jupyter_sessions')
 
 
-@app.post('/start_session')
+@app.post('/start-session')
 async def start_session(user_id: str = Form(...)):
     if user_id in session_manager._sessions:
         session_manager._sessions[user_id].controller.cleanup()
@@ -56,12 +55,12 @@ async def start_session(user_id: str = Form(...)):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post('/execute')
-async def execute_code(request: ExecuteRequest):
-    session_info = await session_manager.get_session(request.user_id)
+@app.post('/execute-code')
+async def execute_code(user_id: str = Form(...), code: str = Form(...)):
+    session_info = await session_manager.get_session(user_id)
 
     try:
-        output = await session_info.controller.execute_code(request.code)
+        output = await session_info.controller.execute_code(code)
 
         return {'output': output}
 
@@ -72,7 +71,7 @@ async def execute_code(request: ExecuteRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post('/reset')
+@app.post('/reset-session')
 async def reset_session(user_id: str = Form(...)):
     session_info = await session_manager.get_session(user_id)
 
@@ -91,7 +90,7 @@ async def reset_session(user_id: str = Form(...)):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post('/end_session')
+@app.post('/end-session')
 async def end_session(user_id: str = Form(...)):
     if user_id not in session_manager._sessions:
         raise HTTPException(status_code=404, detail='Session not found')
